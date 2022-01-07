@@ -1,9 +1,10 @@
 # Server-API
 A framework to easily create a remote hosted API.
 
-Commands can be added to the API which will be called automatically when a post request is made to the server with a header which specifies the command to run. 
+Commands can be added to the API which will be called automatically when a post request is made to the server with a header which specifies the command to run and a security token which grants access to the API. 
 The body of the request should include the command parameters. 
 The server will then return a response with the body being the result of the command.
+Some commands are required for security purposes, one to login using a username and password which issues a token to the user and one to validate the token when a command request is received.
     
 # Setting up the server
 ## Creating the server
@@ -73,7 +74,7 @@ In order to register these commands we need to setup some additional objects.
 The LoginManager must be created and given the path to a credentials file which contains the usernames and hashed passwords for all registered users.
 AddNewUserMain.py should be run on the server to register these users.
 All passwords are hashed using the sha-256 hashing algorithm. The reason to store hashed passwords is to make it more difficult for brute force attacks to find a valid password.
-Hashing the passwords also prevent sus from storing in plain text the password of the user which (shouldn't) but may be used elsewhere.
+Hashing the passwords also prevents us from storing in plain text the password of the user which (shouldn't but) may be used elsewhere.
 Care should still be taken to ensure that the login credentials file is not easily accessible to attackers.
  
 ### Creating the LoginManager
@@ -86,9 +87,9 @@ loginManager = LoginManager(loginDetailsFilePath)
 ```
 
 ## TokenManager
-The TokenManager must be created and given the path to a credentails file which contains the valid token issued by the LogIn command for each user.
+The TokenManager must be created and given the path to a credentials file which contains the valid token issued by the LogIn command for each user.
 After successfully posting a LogIn request, the response will contain the token in the body.
-All requests must include the vlid token in the header so the TokenManager must be created to validate those tokens.
+All requests other than the login request must include the valid token in the header so the TokenManager must be created to validate those tokens.
 
 ### Creating the TokenManager
 
