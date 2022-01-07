@@ -74,7 +74,8 @@ AddNewUserMain.py should be run on the server to register these users.
 All passwords are hashed using the sha-256 hashing algorithm. The reason to store hashed passwords is to make it more difficult for brute force attacks to find a valid password.
 Hashing the passwords also prevents us from storing in plain text the password of the user which (shouldn't but) may be used elsewhere.
 Care should still be taken to ensure that the login credentials file is not easily accessible to attackers.
- 
+It's also worth noting that if attackers know your API is based on this package then they will know based on this document that the passwords are hashed with sha-256 and can therefore use the algorithm as part of an attack.
+
 ### Creating the LoginManager
 
 ```python
