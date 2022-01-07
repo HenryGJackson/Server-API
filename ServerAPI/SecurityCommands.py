@@ -1,7 +1,7 @@
 import json
-import server.LogInManager as lm
-from server.PostOnlyServer import ServerCommand, ServerCommandHandler, ServerException
-import server.TokenManagement as tm
+import ServerAPI.LogInManager as lm
+from ServerAPI.PostOnlyServer import ServerCommand, ServerCommandHandler, ServerException
+import ServerAPI.TokenManagement as tm
 
 class LogInCommand(ServerCommand) :
     class LoginFormatInvalidException(ServerException) :

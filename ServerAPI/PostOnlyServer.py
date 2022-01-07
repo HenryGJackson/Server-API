@@ -1,6 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer, HTTPStatus
 import logging
-from server.Singleton import Singleton
+from ServerAPI.Singleton import Singleton
 import threading
 
 ########################################################################

@@ -1,4 +1,4 @@
-import server.SettingsManager as SettingsManager
+import ServerAPI.SettingsManager as SettingsManager
 
 configSettings : SettingsManager.SettingsManager = None
 

@@ -1,6 +1,6 @@
 from os import getcwd
-import server.IpUtils as IpUtils
-from server.PathUtils import convertPath
+import ServerAPI.IpUtils as IpUtils
+from ServerAPI.PathUtils import convertPath
 
 credentialsArg : str = "-credPath"
 configArg : str = "-configPath"
