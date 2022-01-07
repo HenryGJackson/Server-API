@@ -65,9 +65,7 @@ commandHandler.addPostCommand(exampleCommand)
  # Security
 All commands must be validated with a token which are issued by the server.
 Before a token can be issued however, the user must log in.
-
 Some commands are included to aid with this process, these are "LogIn" and "ValidateToken".
-
 In order to register these commands we need to setup some additional objects.
 
 ## LoginManager
