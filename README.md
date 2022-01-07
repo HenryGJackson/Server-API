@@ -18,7 +18,7 @@ port = 8080
 pos.runServer(port, host)
 ```
 
-The server can also be run async so that the main thread is reserved to do other work using
+The server can instead be run async so that the main thread is reserved to do other work using
 
 ```python
 from ServerAPI import PostOnlyServer as pos
@@ -118,7 +118,7 @@ SecurityCommands.create(commandHandler, tokenManager, loginManager)
 Once the commands have been implementated and added to the server along with the security commands then when the server receives a post request with the command specified in its headers, the command will be executed.
 The body of the request is passed straight to the command's execute function.
 
-## Plain Text Example
+### Plain Text Example
 
     POST HTTP/1.1
     command: ExampleCommand
@@ -128,7 +128,7 @@ The body of the request is passed straight to the command's execute function.
 
     field1=value1&field2=value2
     
-## Json Example
+### Json Example
 
     POST HTTP/1.1
     command: ExampleCommand
@@ -138,7 +138,7 @@ The body of the request is passed straight to the command's execute function.
     
     {"field1": value1, "field2": value2}
     
-## Login Command Example
+### Login Command Example
 
     POST HTTP/1.1
     command: LogIn
