@@ -1,5 +1,5 @@
 from Tests.TestArgumentParser.ArgumentParserUtils import TestableArgumentParser
-from server import ArgumentParser
+from ServerAPI import ArgumentParser
 
 class Test() :
     def run(self) :

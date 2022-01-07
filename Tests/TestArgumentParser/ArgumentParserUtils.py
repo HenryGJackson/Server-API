@@ -1,4 +1,4 @@
-from server import ArgumentParser
+from ServerAPI import ArgumentParser
 
 class TestableArgumentParser(ArgumentParser.ArgumentParser) :
     def setGivenArguments(self, args) :

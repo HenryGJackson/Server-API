@@ -1,5 +1,5 @@
 
-from server.Singleton import Singleton
+from ServerAPI.Singleton import Singleton
 
 class A(Singleton) :
     def __init__(self):
