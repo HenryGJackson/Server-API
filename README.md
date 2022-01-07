@@ -112,7 +112,7 @@ commandHandler = pos.ServerCommandHandler.getInstance()
 SecurityCommands.create(commandHandler, tokenManager, loginManager)
 ```
 
-# Example Post Requests to Execute Commands
+# Example Commands
 Once the commands have been implementated and added to the server along with the security commands then when the server receives a post request with the command specified in its headers, the command will be executed.
 The body of the request is passed straight to the command's execute function.
 
