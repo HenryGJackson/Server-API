@@ -9,20 +9,24 @@ The server will then return a response with the body being the result of the com
 ## Creating the server
 Creating the server and making it run is quite simple, simply import PostOnlyServer and execute the runServer function.
 
-    from ServerAPI import PostOnlyServer as pos
-    
-    host = "localhost"
-    port = 8080
-    pos.runServer(port, host)
-    
+```python
+from ServerAPI import PostOnlyServer as pos
+
+host = "localhost"
+port = 8080
+pos.runServer(port, host)
+```
+
 The server can also be run async so that the main thread is reserved to do other work using
 
-    from ServerAPI import PostOnlyServer as pos
-    
-    host = "localhost"
-    port = 8080
-    pos.runServerAsync(port, host)
-    
+```python
+from ServerAPI import PostOnlyServer as pos
+
+host = "localhost"
+port = 8080
+pos.runServerAsync(port, host)
+```
+
 ## Adding Commands
 Commands can be created by creating a class that inherits from PostOnlyServer.ServerCommand. 
 The command should then specify its command name when it calls the constructor for ServerCommand. 
@@ -30,29 +34,33 @@ The command should also implement an execute function which is what gets called 
 The execute function should then return the result of the command.
 
 ### Command Example
-    from ServerAPI.PostOnlyServer import ServerCommand
-  
-    class ExampleCommand(ServerCommand) :
-      def __init__() :
-        super().__init__("ExampleCommand")
-      
-      def doSomeWork(self, data) :
-        pass
-      
-      def execute(self, data) :
-        return doSomeWork(data)
+```python
+from ServerAPI.PostOnlyServer import ServerCommand
+
+class ExampleCommand(ServerCommand) :
+  def __init__() :
+    super().__init__("ExampleCommand")
+
+  def doSomeWork(self, data) :
+    pass
+
+  def execute(self, data) :
+    return doSomeWork(data)
+```
       
 ### Registering the command with the server
 Once the command has been implemented, it must be registered with the server so that it knows what to run when the request is received.
 To do this, first we need to create a ServerCommandHandler, then we register the command with the handler.
 
-    from ServerAPI.PostOnlyServer import ServerCommandHandler
-    
-    commandHandler = pos.ServerCommandHandler()
-    
-    exampleCommand = ExampleCommand()
-    commandHandler.addPostCommand(exampleCommand)
- 
+```python
+from ServerAPI.PostOnlyServer import ServerCommandHandler
+
+commandHandler = pos.ServerCommandHandler()
+
+exampleCommand = ExampleCommand()
+commandHandler.addPostCommand(exampleCommand)
+```
+
  # Security
 All commands must be validated with a token which are issued by the server.
 Before a token can be issued however, the user must log in.
@@ -70,11 +78,13 @@ Care should still be taken to ensure that the login credentials file is not easi
  
 ### Creating the LoginManager
 
-    from ServerAPI import LoginManager
-    
-    loginDetailsFilePath = "<insert path here>"
-    loginManager = LoginManager(loginDetailsFilePath)
-    
+```python
+from ServerAPI import LoginManager
+
+loginDetailsFilePath = "<insert path here>"
+loginManager = LoginManager(loginDetailsFilePath)
+```
+
 ## TokenManager
 The TokenManager must be created and given the path to a credentails file which contains the valid token issued by the LogIn command for each user.
 After successfully posting a LogIn request, the response will contain the token in the body.
@@ -82,23 +92,27 @@ All requests must include the vlid token in the header so the TokenManager must 
 
 ### Creating the TokenManager
 
-    from ServerAPI.TokenManagement import OwnedTokenManager
-    
-    tokenFilePath = "<insert path here>"
-    tokenManager = OwnedTokenManager(tokenFilePath)
-    
+```python
+from ServerAPI.TokenManagement import OwnedTokenManager
+
+tokenFilePath = "<insert path here>"
+tokenManager = OwnedTokenManager(tokenFilePath)
+```
+
 ## Setting up the Security Commands
 Once the TokenManager and the LoginManager have been created, we need to register these with the security commands and the command manager so that the server can validate logins and commands.
 
 The commands are already implemented along with a helper function to create the commands. This can be done as follows:
     
-    from ServerAPI import SecurityCommands
+```python
+from ServerAPI import SecurityCommands
 
-    # Access the command handler (which should have alredy been created in a previous step)
-    commandHandler = pos.ServerCommandHandler.getInstance()
-    
-    SecurityCommands.create(commandHandler, tokenManager, loginManager)
- 
+# Access the command handler (which should have alredy been created in a previous step)
+commandHandler = pos.ServerCommandHandler.getInstance()
+
+SecurityCommands.create(commandHandler, tokenManager, loginManager)
+```
+
 # Example Post Requests to Execute Commands
 Once the commands have been implementated and added to the server along with the security commands then when the server receives a post request with the command specified in its headers, the command will be executed.
 The body of the request is passed straight to the command's execute function.
